@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>dhtmlxGantt firebase</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="../source/dhtmlx_gantt/sources/dhtmlxgantt.js"></script>
+    <link rel="stylesheet" href="../source/dhtmlx_gantt/sources/skins/dhtmlxgantt_skyblue.css">
+    <script type="text/javascript" src="../../source/dhtmlx_gantt_firebase.js"></script>
+</head>
+<body>
+
+<div id="gantt_here" style="width: 100%; height: 500px;"></div>
+
+
+<script type="text/javascript">
+    var data = new Firebase("https://dhtmlxgantttest.firebaseio.com/");
+
+    //Init gantt.
+    gantt.init("gantt_here");
+
+    //Load data from first collections.
+    gantt.firebase({tasks: data.child("tasks"), links: data.child("links")});
+
+    //Reload data from second collections after 3 seconds after load.
+    setTimeout(function() {
+        gantt.firebaseStop();
+        gantt.clearAll();
+        gantt.firebase({tasks: data.child("tasks_2"), links: data.child("links_2")});
+    }, 3000);
+
+</script>
+</body>
+</html>
