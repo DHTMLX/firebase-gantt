@@ -42,9 +42,8 @@ Create firebase connection and set this to gantt
 
 ```js
     var data = new Firebase("https://dhtmlxgantttest.firebaseio.com/"),
-        events = data.child("events");
-
-    gantt.firebase(events);
+    //Load data from first collections.
+    gantt.firebase({tasks: data.child("tasks"), links: data.child("links")});
 ```
 
 Stop the data adapter
